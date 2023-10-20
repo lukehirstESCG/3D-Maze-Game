@@ -8,6 +8,9 @@ public class EnemyMovementSM : EnemyStateMachine
     public Animator anim;
     public NavMeshAgent agent;
     public bool attacking = false;
+    public Transform endPoint;
+    public Transform startPoint;
+    public Pathfinding pf;
 
     [HideInInspector]
     public enemyIdle idleState;
