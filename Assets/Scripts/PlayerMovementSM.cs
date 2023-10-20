@@ -4,6 +4,9 @@ public class PlayerMovementSM : PlayerStateMachine
 {
     public float speed;
     public CharacterController control;
+    public float rotationSpeed;
+    public Transform Player;
+    public Vector3 rotation;
     public Animator anim;
 
     [HideInInspector]
