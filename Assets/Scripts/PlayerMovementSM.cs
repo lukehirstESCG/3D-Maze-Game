@@ -7,14 +7,14 @@ public class PlayerMovementSM : PlayerStateMachine
     public Animator anim;
 
     [HideInInspector]
-    public PlayerIdle idleState;
+    public playerIdle idleState;
     [HideInInspector]
-    public PlayerMoving movingState;
+    public playerMoving movingState;
 
     private void Awake()
     {
-        idleState = new PlayerIdle(this);
-        movingState = new PlayerMoving(this);
+        idleState = new playerIdle(this);
+        movingState = new playerMoving(this);
     }
 
     protected override PlayerBaseState GetInitialState()

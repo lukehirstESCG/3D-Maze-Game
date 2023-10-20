@@ -1,17 +1,30 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMovementSM : MonoBehaviour
+public class EnemyMovementSM : EnemyStateMachine
 {
-    // Start is called before the first frame update
-    void Start()
+    public Transform target;
+    public Transform enemy;
+    public Animator anim;
+    public NavMeshAgent agent;
+    public bool attacking = false;
+
+    [HideInInspector]
+    public enemyIdle idleState;
+    [HideInInspector]
+    public enemyPatrol patrolState;
+    [HideInInspector]
+    public enemyAttack attackState;
+
+    private void Awake()
     {
-        
+        idleState = new enemyIdle(this);
+        patrolState = new enemyPatrol(this);
+        attackState = new enemyAttack(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override EnemyBaseState GetInitialState()
     {
-        
+        return idleState;
     }
 }
