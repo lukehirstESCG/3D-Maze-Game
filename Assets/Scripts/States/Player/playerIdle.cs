@@ -18,12 +18,9 @@ public class playerIdle : PlayerBaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-        if (Mathf.Abs(horizontalInput) > Mathf.Abs(verticalInput) || Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput))
         {
             playsm.ChangeState(playsm.movingState);
-            playsm.anim.SetBool("move", true);
+           // playsm.anim.SetBool("move", true);
         }
     }
 }
