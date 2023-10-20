@@ -22,8 +22,8 @@ public class playerMoving : PlayerBaseState
         if (playsm.direction.magnitude <= 0.01f)
         {
             playerStateMachine.ChangeState(playsm.idleState);
-          // playsm.anim.SetBool("move", false);
-        }    
+            playsm.anim.SetBool("move", false);
+        }
     }
 
     public override void UpdatePhysics()
@@ -32,5 +32,9 @@ public class playerMoving : PlayerBaseState
 
         playsm.control.Move(playsm.direction * playsm.speed * Time.deltaTime);
         playsm.direction = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+
+        playsm.rotation = new Vector3(0, Input.GetAxis("Vertical") * playsm.rotationSpeed * Time.deltaTime, 0);
+
+        playsm.transform.Rotate(playsm.rotation);
     }
 }

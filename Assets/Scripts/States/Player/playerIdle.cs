@@ -28,8 +28,8 @@ public class playerIdle : PlayerBaseState
 
         if (playsm.direction.magnitude > 0.01f)
         {
-           playerStateMachine.ChangeState(playsm.movingState);
-           // playsm.anim.SetBool("move", true);
+            playerStateMachine.ChangeState(playsm.movingState);
+            playsm.anim.SetBool("move", true);
         }
     }
 }
