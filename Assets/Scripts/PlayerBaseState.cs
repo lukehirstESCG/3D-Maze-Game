@@ -1,14 +1,13 @@
 using UnityEngine;
-
 public class PlayerBaseState
 {
     public string name;
-    protected PlayerStateMachine playsm;
+    protected PlayerStateMachine playerStateMachine;
 
-    public PlayerBaseState(string name, PlayerStateMachine playsm)
+    public PlayerBaseState(string name, PlayerStateMachine playerStateMachine)
     {
         this.name = name;
-        this.playsm = playsm;
+        this.playerStateMachine = playerStateMachine;
     }
 
     public virtual void Enter() { }

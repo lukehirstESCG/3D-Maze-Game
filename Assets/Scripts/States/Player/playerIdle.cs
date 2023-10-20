@@ -3,10 +3,13 @@ using UnityEngine;
 public class playerIdle : PlayerBaseState
 {
     private PlayerMovementSM playsm;
-    private float horizontalInput;
-    private float verticalInput;
+    float horizontalInput;
+    float verticalInput;
 
-    public playerIdle(PlayerMovementSM playsm) : base("Idle", playsm) { }
+    public playerIdle(PlayerMovementSM playerStateMachine) : base("Idle", playerStateMachine)
+    {
+        playsm = playerStateMachine;
+    }
 
     public override void Enter()
     {
@@ -18,8 +21,14 @@ public class playerIdle : PlayerBaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
+
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        playsm.direction = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+
+        if (playsm.direction.magnitude > 0.01f)
         {
-            playsm.ChangeState(playsm.movingState);
+           playerStateMachine.ChangeState(playsm.movingState);
            // playsm.anim.SetBool("move", true);
         }
     }

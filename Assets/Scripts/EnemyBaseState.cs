@@ -1,14 +1,12 @@
-using UnityEngine;
-
 public class EnemyBaseState
 {
     public string name;
-    protected EnemyStateMachine esm;
+    protected EnemyStateMachine enemyStateMachine;
 
-    public EnemyBaseState(string name, EnemyStateMachine esm)
+    public EnemyBaseState(string name, EnemyStateMachine enemyStateMachine)
     {
         this.name = name;
-        this.esm = esm;
+        this.enemyStateMachine = enemyStateMachine;
     }
 
     public virtual void Enter() { }

@@ -5,21 +5,23 @@ public class playerMoving : PlayerBaseState
     private float horizontalInput;
     private float verticalInput;
     private PlayerMovementSM playsm;
-    public playerMoving(PlayerMovementSM playsm) : base("Moving", playsm) { }
+    public playerMoving(PlayerMovementSM playerStateMachine) : base("Moving", playerStateMachine)
+    {
+        playsm = playerStateMachine;
+    }
 
     public override void Enter()
     {
         base.Enter();
-        horizontalInput = 0;
-        verticalInput = 0;
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
 
+        if (playsm.direction.magnitude <= 0.01f)
         {
-            playsm.ChangeState(playsm.idleState);
+            playerStateMachine.ChangeState(playsm.idleState);
           // playsm.anim.SetBool("move", false);
         }    
     }
@@ -28,15 +30,7 @@ public class playerMoving : PlayerBaseState
     {
         base.UpdatePhysics();
 
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-
-        playsm.rotation = new Vector3(0, Input.GetAxis("Horizontal") * playsm.rotationSpeed * Time.deltaTime, 0);
-
-        Vector3 direction = new Vector3(horizontalInput, 0, verticalInput).normalized;
-        Vector3 move = new Vector3(0, 0, Input.GetAxisRaw("Vertical") * Time.deltaTime);
-        move = playsm.transform.TransformDirection(move);
-        playsm.control.Move(move * playsm.speed);
-        playsm.transform.Rotate(playsm.rotation);
+        playsm.control.Move(playsm.direction * playsm.speed * Time.deltaTime);
+        playsm.direction = new Vector3(horizontalInput, 0f, verticalInput).normalized;
     }
 }

@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class PlayerMovementSM : PlayerStateMachine
 {
-    public float speed;
+    public float speed = 5;
     public CharacterController control;
     public float rotationSpeed;
     public Transform Player;
-    public Vector3 rotation;
     public Vector3 direction;
-    public Animator anim;
+   // public Animator anim;
 
     [HideInInspector]
     public playerIdle idleState;
