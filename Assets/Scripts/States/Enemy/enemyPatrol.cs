@@ -1,9 +1,11 @@
+using UnityEngine.AI;
 using UnityEngine;
+using NUnit.Framework.Internal;
 
 public class enemyPatrol : EnemyBaseState
 {
     private EnemyMovementSM esm;
-    public enemyPatrol(EnemyMovementSM esm) : base("Patrol", esm) { }
+    public enemyPatrol(EnemyMovementSM enemyStateMachine) : base("Patrol", enemyStateMachine) { }
 
     public override void Enter()
     {
@@ -13,18 +15,30 @@ public class enemyPatrol : EnemyBaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-
-        if (esm.agent.transform.position == esm.endPoint.transform.position)
         {
-            enemyStateMachine.ChangeState(esm.idleState);
-            Debug.Log("IDLE!");
+           
         }
     }
 
     public override void UpdatePhysics()
     {
         base.UpdatePhysics();
-        
-        esm.pf.GoToNextPoint();
+        {
+            if (!esm.agent.pathPending && esm.agent.remainingDistance < 0.5f)
+            {
+                GoToNextPoint();
+            }
+
+            void GoToNextPoint()
+            {
+                if (esm.points.Length == 0)
+                {
+                    return;
+                }
+                esm.agent.destination = esm.points[esm.dests].position;
+                esm.dests = (esm.dests + 1) % esm.points.Length;
+            }
+
+        }
     }
 }

@@ -5,12 +5,11 @@ public class EnemyMovementSM : EnemyStateMachine
 {
     public Transform target;
     public Transform enemy;
-    public Animator anim;
     public NavMeshAgent agent;
+    [HideInInspector]
+    public int dests;
     public bool attacking = false;
-    public Transform endPoint;
-    public Transform startPoint;
-    public Pathfinding pf;
+    public Transform[] points;
 
     [HideInInspector]
     public enemyIdle idleState;

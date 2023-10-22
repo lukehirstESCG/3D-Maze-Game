@@ -5,7 +5,7 @@ public class PlayerMovementSM : PlayerStateMachine
     public float speed = 5;
     public CharacterController control;
     public float rotationSpeed;
-    public Transform Player;
+    public Transform player;
     public Vector3 direction;
     public Vector3 rotation;
     public Animator anim;

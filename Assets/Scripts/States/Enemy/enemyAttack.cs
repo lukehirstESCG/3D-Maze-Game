@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class enemyAttack : EnemyBaseState
 {
-    public enemyAttack(EnemyMovementSM esm) : base("Attack", esm) { }
+    private EnemyMovementSM esm;
+    public enemyAttack(EnemyMovementSM enemyStateMachine) : base("Attack", enemyStateMachine) { }
 
     public override void Enter()
     {
@@ -17,5 +18,7 @@ public class enemyAttack : EnemyBaseState
     public override void UpdatePhysics()
     {
         base.UpdatePhysics();
+
+        esm.agent.SetDestination(esm.target.position);
     }
 }
