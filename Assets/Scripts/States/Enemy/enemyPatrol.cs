@@ -33,11 +33,6 @@ public class enemyPatrol : EnemyBaseState
     {
         base.UpdatePhysics();
         {
-
-            Vector3 direction = esm.target.position - esm.enemy.transform.position;
-
-            esm.enemy.transform.rotation = Quaternion.Slerp(esm.enemy.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
-
             if (!esm.agent.pathPending && esm.agent.remainingDistance < 0.5f)
             {
                 GoToNextPoint();
