@@ -3,7 +3,10 @@ using UnityEngine;
 public class enemyAttack : EnemyBaseState
 {
     private EnemyMovementSM esm;
-    public enemyAttack(EnemyMovementSM enemyStateMachine) : base("Attack", enemyStateMachine) { }
+    public enemyAttack(EnemyMovementSM enemyStateMachine) : base("Attack", enemyStateMachine)
+    {
+        esm = enemyStateMachine;
+    }
 
     public override void Enter()
     {

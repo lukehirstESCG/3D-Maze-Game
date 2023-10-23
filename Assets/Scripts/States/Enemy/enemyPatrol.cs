@@ -1,11 +1,12 @@
-using UnityEngine.AI;
 using UnityEngine;
-using NUnit.Framework.Internal;
 
 public class enemyPatrol : EnemyBaseState
 {
     private EnemyMovementSM esm;
-    public enemyPatrol(EnemyMovementSM enemyStateMachine) : base("Patrol", enemyStateMachine) { }
+    public enemyPatrol(EnemyMovementSM enemyStateMachine) : base("Patrol", enemyStateMachine)
+    {
+        esm = enemyStateMachine;
+    }
 
     public override void Enter()
     {
@@ -16,7 +17,15 @@ public class enemyPatrol : EnemyBaseState
     {
         base.UpdateLogic();
         {
-           
+            if (Vector3.Distance(esm.target.transform.position, esm.enemy.transform.position) > 8)
+            {
+                enemyStateMachine.ChangeState(esm.idleState);
+            }
+
+            if (Vector3.Distance(esm.target.position, esm.enemy.transform.position) <= 2)
+            {
+                enemyStateMachine.ChangeState(esm.attackState);
+            }
         }
     }
 
@@ -24,6 +33,11 @@ public class enemyPatrol : EnemyBaseState
     {
         base.UpdatePhysics();
         {
+
+            Vector3 direction = esm.target.position - esm.enemy.transform.position;
+
+            esm.enemy.transform.rotation = Quaternion.Slerp(esm.enemy.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
+
             if (!esm.agent.pathPending && esm.agent.remainingDistance < 0.5f)
             {
                 GoToNextPoint();
