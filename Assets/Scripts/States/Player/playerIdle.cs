@@ -24,9 +24,9 @@ public class playerIdle : PlayerBaseState
 
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        playsm.direction = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+        float direction = new Vector2(horizontalInput, verticalInput).magnitude;
 
-        if (playsm.direction.magnitude > 0.01f)
+        if (direction > 0.01f)
         {
             playerStateMachine.ChangeState(playsm.movingState);
             playsm.anim.SetBool("move", true);

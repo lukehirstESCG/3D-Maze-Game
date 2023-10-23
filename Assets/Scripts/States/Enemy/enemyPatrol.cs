@@ -22,9 +22,9 @@ public class enemyPatrol : EnemyBaseState
                 enemyStateMachine.ChangeState(esm.idleState);
             }
 
-            if (Vector3.Distance(esm.target.position, esm.enemy.transform.position) <= 2)
+            if (Vector3.Distance(esm.target.position, esm.enemy.transform.position) <= 3)
             {
-                enemyStateMachine.ChangeState(esm.attackState);
+                enemyStateMachine.ChangeState(esm.attackState);                
             }
         }
     }
