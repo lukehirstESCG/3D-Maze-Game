@@ -29,5 +29,9 @@ public class enemyAttack : EnemyBaseState
 
         // Chase the player
         esm.agent.SetDestination(esm.target.position);
+
+        Vector3 direction = esm.target.position - esm.enemy.transform.position;
+
+        esm.enemy.transform.rotation = Quaternion.Slerp(esm.enemy.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
     }
 }
