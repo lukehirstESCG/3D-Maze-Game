@@ -16,12 +16,18 @@ public class enemyAttack : EnemyBaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
+
+        if (Vector3.Distance(esm.target.position, esm.enemy.transform.position) > 2)
+        {
+            enemyStateMachine.ChangeState(esm.patrolState);
+        }
     }
 
     public override void UpdatePhysics()
     {
         base.UpdatePhysics();
 
+        // Chase the player
         esm.agent.SetDestination(esm.target.position);
     }
 }
