@@ -5,7 +5,7 @@ public class EnemyMovementSM : EnemyStateMachine
 {
     public Transform target;
     public Transform enemy;
-    public float damage;
+    public int damage;
     public Transform[] points;
     public NavMeshAgent agent;
     public PlayerHealth pHealth;

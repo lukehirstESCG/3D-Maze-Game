@@ -34,9 +34,12 @@ public class enemyAttack : EnemyBaseState
 
         esm.enemy.transform.rotation = Quaternion.Slerp(esm.enemy.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
 
-        if (Vector3.Distance(esm.target.position, esm.enemy.transform.position) == 0)
+        void OnCollisionEnter(Collision other)
         {
-            esm.pHealth.health -= esm.damage;
+            if (other.gameObject.CompareTag("Player"))
+            {
+                esm.pHealth.TakeDamage(esm.damage);
+            }
         }
     }
 }

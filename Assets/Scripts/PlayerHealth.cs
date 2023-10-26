@@ -4,12 +4,12 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     public float health;
-    public float maxHealth;
+    public float maxHealth = 100;
     public Image healthBar;
 
     private void Start()
     {
-        maxHealth = health;
+        health = maxHealth;
     }
 
     public void Update()
@@ -19,8 +19,12 @@ public class PlayerHealth : MonoBehaviour
 
     void UpdateHealth()
     {
-        healthBar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 100);
+        healthBar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);
+    }
 
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
         if (health <= 0)
         {
             Destroy(gameObject);
