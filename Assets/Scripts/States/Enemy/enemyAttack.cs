@@ -33,5 +33,10 @@ public class enemyAttack : EnemyBaseState
         Vector3 direction = esm.target.position - esm.enemy.transform.position;
 
         esm.enemy.transform.rotation = Quaternion.Slerp(esm.enemy.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
+
+        if (Vector3.Distance(esm.target.position, esm.enemy.transform.position) == 0)
+        {
+            esm.pHealth.health -= esm.damage;
+        }
     }
 }
