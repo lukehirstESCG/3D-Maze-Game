@@ -11,6 +11,8 @@ public class enemyAttack : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
+
+        esm.pHealth.health = esm.pHealth.maxHealth;
     }
 
     public override void UpdateLogic()
@@ -34,12 +36,10 @@ public class enemyAttack : EnemyBaseState
 
         esm.enemy.transform.rotation = Quaternion.Slerp(esm.enemy.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
 
-        void OnCollisionEnter(Collision other)
+        if (Vector3.Distance(esm.target.position, esm.enemy.transform.position) <= 1)
         {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                esm.pHealth.TakeDamage(esm.damage);
-            }
+            esm.pHealth.TakeDamage(esm.damage);
+            Debug.Log("OW!");
         }
     }
 }
