@@ -14,6 +14,7 @@ public class EndGame : MonoBehaviour
     public Button Yes;
     public Button Exit;
     public float delay = 5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,18 +25,28 @@ public class EndGame : MonoBehaviour
         PacmanFail.SetActive(false);
         GAMEOVER.SetActive(false);
         Confirm.SetActive(false);
-        StartCoroutine(GameOver());
     }
 
-    IEnumerator GameOver()
+    private void Update()
+    {
+        Reveal();
+        Restart();
+        NoPlayAgain();
+        RealGameOver();
+    }
+
+    public void Reveal()
     {
         Message.enabled = true;
 
-        yield return new WaitForSeconds(delay);
+        delay = 5;
+
+        delay -= Time.deltaTime;
 
         PlayAgain.enabled = true;
         Yes.enabled = true;
         Exit.enabled = true;
+        delay = 0;
     }
 
     public void Restart()
@@ -61,5 +72,7 @@ public class EndGame : MonoBehaviour
         delay = 0;
 
         Application.Quit();
+
+        GAMEOVER.SetActive(false);
     }
 }

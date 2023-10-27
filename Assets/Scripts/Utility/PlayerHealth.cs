@@ -9,6 +9,11 @@ public class PlayerHealth : MonoBehaviour
     public Image healthBar;
     public GameObject target;
 
+    public void Start()
+    {
+        health = 100;
+    }
+
     public void Update()
     {
         UpdateHealth();
@@ -26,7 +31,6 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             Destroy(target);
-            Time.timeScale = 0;
             gameOver.PacmanFail.SetActive(true);
         }
     }
