@@ -6,47 +6,23 @@ using TMPro;
 
 public class EndGame : MonoBehaviour
 {
-    public TextMeshProUGUI Message;
-    public TextMeshProUGUI PlayAgain;
     public GameObject PacmanFail;
     public GameObject Confirm;
     public GameObject GAMEOVER;
-    public Button Yes;
-    public Button Exit;
-    public float delay = 5;
+    public GameObject EnergyBar;
 
     // Start is called before the first frame update
     void Start()
     {
-        Message.enabled = false;
-        PlayAgain.enabled = false;
-        Yes.enabled = false;
-        Exit.enabled = false;
         PacmanFail.SetActive(false);
         GAMEOVER.SetActive(false);
         Confirm.SetActive(false);
-    }
-
-    private void Update()
-    {
-        Reveal();
-        Restart();
-        NoPlayAgain();
-        RealGameOver();
+        EnergyBar.SetActive(true);
     }
 
     public void Reveal()
     {
-        Message.enabled = true;
-
-        delay = 5;
-
-        delay -= Time.deltaTime;
-
-        PlayAgain.enabled = true;
-        Yes.enabled = true;
-        Exit.enabled = true;
-        delay = 0;
+        EnergyBar.SetActive(false);
     }
 
     public void Restart()
@@ -64,12 +40,6 @@ public class EndGame : MonoBehaviour
     {
         Confirm.SetActive(false);
         GAMEOVER.SetActive(true);
-
-        delay = 5;
-
-        delay -= Time.deltaTime;
-
-        delay = 0;
 
         Application.Quit();
 
