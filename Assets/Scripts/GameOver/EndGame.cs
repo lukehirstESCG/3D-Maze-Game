@@ -9,7 +9,7 @@ public class EndGame : MonoBehaviour
     public GameObject PacmanFail;
     public GameObject Confirm;
     public GameObject GAMEOVER;
-    public GameObject EnergyBar;
+    public GameObject MainUI;
 
     // Start is called before the first frame update
     void Start()
@@ -17,12 +17,12 @@ public class EndGame : MonoBehaviour
         PacmanFail.SetActive(false);
         GAMEOVER.SetActive(false);
         Confirm.SetActive(false);
-        EnergyBar.SetActive(true);
+        MainUI.SetActive(true);
     }
 
     public void Reveal()
     {
-        EnergyBar.SetActive(false);
+        MainUI.SetActive(false);
     }
 
     public void Restart()
