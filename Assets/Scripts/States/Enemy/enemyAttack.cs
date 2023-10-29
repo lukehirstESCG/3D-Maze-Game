@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 
 public class enemyAttack : EnemyBaseState
@@ -36,10 +37,9 @@ public class enemyAttack : EnemyBaseState
 
         esm.enemy.transform.rotation = Quaternion.Slerp(esm.enemy.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
 
-        if (Vector3.Distance(esm.target.position, esm.enemy.transform.position) <= 0.5)
+        if (Vector3.Distance(esm.target.position, esm.enemy.transform.position) <= 0.15)
         {
             esm.pHealth.TakeDamage(esm.damage);
-            Debug.Log("OW!");
         }
     }
 }
