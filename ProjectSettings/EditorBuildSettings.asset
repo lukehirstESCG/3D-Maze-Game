@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 41e1180aaaa66e14b91804e29225c7fa
+  - enabled: 1
     path: Assets/Scenes/Maze(Windows).unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Maze(Mobile).unity
+    guid: cd8406c684411674780ef3d9b64017e3
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
