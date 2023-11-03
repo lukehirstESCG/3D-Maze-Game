@@ -4,10 +4,10 @@ public class playerMovingTouch : PlayerBaseState
 {
     float horizontalInput;
     float verticalInput;
-    private PlayerMovementMobileSM playsm;
+    private PlayerMovementMobileSM playsme;
     public playerMovingTouch(PlayerMovementMobileSM playerStateMachine) : base("Moving", playerStateMachine)
     {
-        playsm = playerStateMachine;
+        playsme = playerStateMachine;
     }
 
     public override void Enter()
@@ -21,14 +21,14 @@ public class playerMovingTouch : PlayerBaseState
     {
         base.UpdateLogic();
 
-        horizontalInput = playsm.mobile.Horizontal;
-        verticalInput = playsm.mobile.Vertical;
+        horizontalInput = playsme.joystick.Horizontal;
+        verticalInput = playsme.joystick.Vertical;
         float direction = new Vector2(horizontalInput, verticalInput).magnitude;
 
-        if (direction <= 0.01f)
+        if (direction <= 0.01)
         {
-            playerStateMachine.ChangeState(playsm.idleState);
-            playsm.anim.SetBool("move", false);
+            playerStateMachine.ChangeState(playsme.idleState);
+            playsme.anim.SetBool("move", false);
         }
     }
 
@@ -36,14 +36,14 @@ public class playerMovingTouch : PlayerBaseState
     {
         base.UpdatePhysics();
 
-        playsm.rotation = new Vector3(0, playsm.mobile.Horizontal * playsm.rotationSpeed * Time.deltaTime, 0);
+        playsme.rotation = new Vector3(0, playsme.joystick.Horizontal * playsme.rotationSpeed * Time.deltaTime, 0);
 
-        Vector3 move = new Vector3(0, 0, playsm.mobile.Vertical * Time.deltaTime);
-        move = playsm.transform.TransformDirection(move);
-        playsm.control.Move(move * playsm.speed);
-        playsm.transform.Rotate(playsm.rotation);
+        Vector3 move = new Vector3(0, 0, playsme.joystick.Vertical * Time.deltaTime);
+        move = playsme.transform.TransformDirection(move);
+        playsme.control.Move(move * playsme.speed);
+        playsme.transform.Rotate(playsme.rotation);
 
-        playsm.cam.transform.position = playsm.transform.position;
-        playsm.cam.rotation = playsm.player.rotation;
+        playsme.cam.transform.position = playsme.transform.position;
+        playsme.cam.rotation = playsme.player.rotation;
     }
 }

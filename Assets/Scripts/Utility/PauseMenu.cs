@@ -20,7 +20,7 @@ public class PauseMenu : MonoBehaviour
 
     public void TriggerMenu()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) == true)
         {
             pause.SetActive(true);
             Time.timeScale = 0;

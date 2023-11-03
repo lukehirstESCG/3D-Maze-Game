@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class playerIdleTouch : PlayerBaseState
 {
-    private PlayerMovementMobileSM playsm;
+    private PlayerMovementMobileSM playsme;
     float horizontalInput;
     float verticalInput;
 
     public playerIdleTouch(PlayerMovementMobileSM playerStateMachine) : base("Idle", playerStateMachine)
     {
-        playsm = playerStateMachine;
+        playsme = playerStateMachine;
     }
 
     public override void Enter()
@@ -22,14 +22,14 @@ public class playerIdleTouch : PlayerBaseState
     {
         base.UpdateLogic();
 
-        horizontalInput = playsm.mobile.Horizontal;
-        verticalInput = playsm.mobile.Vertical;
+        horizontalInput = playsme.joystick.Horizontal;
+        verticalInput = playsme.joystick.Vertical;
         float direction = new Vector2(horizontalInput, verticalInput).magnitude;
 
         if (direction > 0.01f)
         {
-            playerStateMachine.ChangeState(playsm.movingState);
-            playsm.anim.SetBool("move", true);
+            playerStateMachine.ChangeState(playsme.movingState);
+            playsme.anim.SetBool("move", true);
         }
     }
 }

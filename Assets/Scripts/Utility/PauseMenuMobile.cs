@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenuMobile : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject puaseMenuToggle;
 
     private void Start()
     {
