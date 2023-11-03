@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class playerMoving : PlayerBaseState
 {
-    private float horizontalInput;
-    private float verticalInput;
+    float horizontalInput;
+    float verticalInput;
     private PlayerMovementSM playsm;
     public playerMoving(PlayerMovementSM playerStateMachine) : base("Moving", playerStateMachine)
     {
@@ -13,13 +13,19 @@ public class playerMoving : PlayerBaseState
     public override void Enter()
     {
         base.Enter();
+        horizontalInput = 0;
+        verticalInput = 0;
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
 
-        if (playsm.direction.magnitude <= 0.01f)
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        float direction = new Vector2(horizontalInput, verticalInput).magnitude;
+
+        if (direction <= 0.01f)
         {
             playerStateMachine.ChangeState(playsm.idleState);
             playsm.anim.SetBool("move", false);
@@ -30,11 +36,14 @@ public class playerMoving : PlayerBaseState
     {
         base.UpdatePhysics();
 
-        playsm.control.Move(playsm.direction * playsm.speed * Time.deltaTime);
-        playsm.direction = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+        playsm.rotation = new Vector3(0, Input.GetAxis("Horizontal") * playsm.rotationSpeed * Time.deltaTime, 0);
 
-        playsm.rotation = new Vector3(0, Input.GetAxis("Vertical") * playsm.rotationSpeed * Time.deltaTime, 0);
-
+        Vector3 move = new Vector3(0, 0, Input.GetAxisRaw("Vertical") * Time.deltaTime);
+        move = playsm.transform.TransformDirection(move);
+        playsm.control.Move(move * playsm.speed);
         playsm.transform.Rotate(playsm.rotation);
+
+        playsm.cam.transform.position = playsm.transform.position;
+        playsm.cam.rotation = playsm.player.rotation;
     }
 }

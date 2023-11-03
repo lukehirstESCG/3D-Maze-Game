@@ -3,7 +3,10 @@ using UnityEngine;
 public class enemyIdle : EnemyBaseState
 {
     private EnemyMovementSM esm;
-    public enemyIdle(EnemyMovementSM esm) : base("Idle", esm) { }
+    public enemyIdle(EnemyMovementSM enemyStateMachine) : base("Idle", enemyStateMachine)
+    {
+        esm = enemyStateMachine;
+    }
 
     public override void Enter()
     {
@@ -13,11 +16,11 @@ public class enemyIdle : EnemyBaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-
-        if (esm.agent.transform.position == esm.startPoint.transform.position)
         {
-            enemyStateMachine.ChangeState(esm.patrolState);
-            Debug.Log("PATROLLING");
+            if (Vector3.Distance(esm.enemy.transform.position, esm.target.position) <= 8)
+            {
+                enemyStateMachine.ChangeState(esm.patrolState);
+            }
         }
     }
 }
