@@ -10,11 +10,21 @@ public class TypeSelect : MonoBehaviour
     public void Windows()
     {
         SceneManager.LoadScene("Maze(Windows)");
+
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+        }
     }
 
     public void Mobile()
     {
         SceneManager.LoadScene("Maze(Mobile)");
+
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+        }
     }
 
 
