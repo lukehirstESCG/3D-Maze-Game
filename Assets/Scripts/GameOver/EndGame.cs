@@ -38,11 +38,6 @@ public class EndGame : MonoBehaviour
 
     public void RealGameOver()
     {
-        Confirm.SetActive(false);
-        GAMEOVER.SetActive(true);
-
         Application.Quit();
-
-        GAMEOVER.SetActive(false);
     }
 }
